@@ -1,0 +1,31 @@
+/* swap func */
+void Swap(int * swap1, int * swap2)
+{
+	int temp = *swap1;
+	*swap1 = *swap2;
+	*swap2 = temp;
+
+}
+ /* Quick Sort  */ 
+void Quick(int head, int tail, int *testArr)
+{
+	if (head >= tail)        // head == tail means it is on proper location 
+		return;
+	int  i = head + 1;         
+	int  j = tail;      
+	int key = head;            // pivot index is start of assigned array
+
+	while (i <= j)              //  until j is back of  i
+	{
+		while (testArr[i] <= testArr[key])                  // <=  배열 데이터에 하나라도 같은 값이 있다면 = 을 넣어줘야한다.(그냥 넣으세요.)
+			i++;
+		while (testArr[j] >= testArr[key] && j > head)       // j index can go until head 
+			j--;
+		if (i > j)                      // if they are sorted this FunC  , key data needs go to its proper location 
+			Swap(&testArr[j], &testArr[key]);       
+		else
+			Swap(&testArr[i], &testArr[j]);
+	}
+	Quick(head, j - 1, testArr);
+	Quick(j + 1, tail, testArr);
+}
